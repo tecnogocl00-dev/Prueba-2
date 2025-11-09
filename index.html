@@ -66,8 +66,8 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
-    <!-- Aumentado a max-w-xl para hacerlo más ancho y mejorar la relación de aspecto -->
-    <div id="contenedor-principal" class="w-full max-w-xl">
+    <!-- Contenedor principal para el formulario de entrada (máx. 384px de ancho) -->
+    <div id="contenedor-principal" class="w-full max-w-md">
 
         <!-- Área de Ingreso de Datos (Formulario) -->
         <div id="formulario-generador" class="bg-white rounded-xl shadow-xl p-6 mb-4">
@@ -106,9 +106,10 @@
         </div>
 
         <!-- Área del Comprobante Generado -->
-        <div id="comprobante-generado" class="hidden">
+        <div id="comprobante-generado" class="hidden w-full overflow-x-auto p-2">
             
-            <div id="comprobante-card-design">
+            <!-- CLAVE: w-[400px] para asegurar que el diseño sea siempre el mismo, independientemente del móvil -->
+            <div id="comprobante-card-design" class="w-[400px] mx-auto">
 
                 <!-- HEADER / BRANDING -->
                 <div class="text-center pb-4 mb-4 border-b border-gray-200">
@@ -193,7 +194,7 @@
             </div>
 
             <!-- Botones de Acción (Fuera del diseño del comprobante para captura) -->
-            <div id="acciones-botones" class="mt-6 flex space-x-4">
+            <div id="acciones-botones" class="mt-6 flex space-x-4 max-w-[400px] mx-auto">
                 <button id="btn-reiniciar" onclick="reiniciar()"
                         class="flex-1 bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 transition duration-150 shadow-md">
                     Nuevo Comprobante
@@ -204,7 +205,7 @@
                 </button>
             </div>
             
-            <p id="instrucciones-descarga" class="mt-4 p-3 bg-green-100 text-green-800 rounded-lg text-sm hidden text-center font-medium">
+            <p id="instrucciones-descarga" class="mt-4 p-3 bg-green-100 text-green-800 rounded-lg text-sm hidden text-center font-medium max-w-[400px] mx-auto">
                 ¡Descarga exitosa! El archivo PNG está listo para enviar por WhatsApp.
             </p>
         </div>
@@ -281,7 +282,7 @@
             try {
                 // Usar html2canvas para capturar el elemento
                 const canvas = await html2canvas(card, {
-                    scale: 3, // Mantenemos la escala alta para alta resolución (clave para la calidad en WhatsApp)
+                    scale: 3, // Mantenemos la escala alta para alta resolución
                     useCORS: true,
                     backgroundColor: null
                 });
